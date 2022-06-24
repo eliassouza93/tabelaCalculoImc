@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+        th{
+            background-color: rgba(128, 128, 128, 0.658);
+            text-transform: uppercase;
+        }
+        th, td{
+            height: 15px;
+            width: 115px;
+            border: 1px solid;
+            text-align: center;
+        }
+        header{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            width: 100%;
+
+        }
+        .container{
+            width: 50%;
+            height: 400px;
+        }
+        .container1{
+            width: 50%;
+            height: 400px;
+        }
+        #form-adiciona{
+            display: flex;
+            flex-wrap: wrap;
+            width: 50%;
+            justify-content: space-between;
+            
+
+        }
+        .grupo{
+            width: 100%;
+        }
+        input{
+            width: 100%;
+            height: 30px;
+       
+        }
+        button{
+            margin-top: 10px;
+            height: 50px;
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+
+        }
+    </style>
+    <title>Tabela</title>
+</head>
+<body>
+   <header>
+       <section class="container1">
+           <h2>Tabela nutricional</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Peso</th>
+                        <th>Altura</th>
+                        <th>IMC</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-pacientes">
+                    <tr class="paciente">
+                        <!--<td class="info-nome"></td>//-->
+                        <!--<td class="info-peso"></td>//-->
+                        <!--<td class="info-altura"></td>//-->
+                        <!--<td id="result" class="info-imc"></td>//-->
+                    </tr>
+            </table>
+            </tbody>
+       </section>
+       <!-- ... -->
+       <section class="container">
+        <h2 id="titulo-form">Calcular imc</h2>
+        <form id="form-adiciona">
+            <div class="grupo">
+                <label for="nome">Nome:</label>
+                <input id="nome" name="nome" type="text" placeholder="digite o nome" class="campo">
+            </div>
+            <div class="grupo">
+                <label for="peso">Peso:</label>
+                <input id="peso" name="peso" type="text" placeholder="digite o peso" class="campo campo-medio">
+            </div>
+            <div class="grupo">
+                <label for="altura">Altura:</label>
+                <input id="altura" name="altura" type="text" placeholder="digite a altura" class="campo campo-medio">
+            </div>
+       
+            <button id="adicionar-paciente" class="botao bto-principal">Adicionar</button>
+        </form>
+       </section>
+   </header>
+   <script>
+       var paciente = document.querySelector('#adicionar-paciente').addEventListener
+       ('click', (event)=>{
+           event.preventDefault();
+         
+            var form = document.querySelector('#form-adiciona')
+
+            var nome = form.nome.value;
+            var peso = form.peso.value;
+            var altura = form.altura.value;
+          
+            var pacienteTr = document.createElement('tr')
+
+            var nomeTd = document.createElement('td')
+            var pesoTd = document.createElement('td')
+            var alturaTd = document.createElement('td')
+            var imcTd = document.createElement('td')
+           
+           
+            nomeTd.textContent = nome;
+            pesoTd.textContent = peso;
+            alturaTd.textContent = altura;
+            imcTd.textContent = calculaImc(peso, altura)
+        
+         
+            pacienteTr.appendChild(nomeTd)
+            pacienteTr.appendChild(pesoTd)
+            pacienteTr.appendChild(alturaTd)
+            pacienteTr.appendChild(imcTd)
+            
+            var tabela = document.querySelector('#tabela-pacientes')
+            tabela.appendChild(pacienteTr);
+
+           
+       })
+       function calculaImc(peso, altura){
+           var imc = 0
+           imc = peso / (altura * altura);
+           return imc.toFixed(2)
+       }
+
+   </script>
+
+</body>
+</html>
